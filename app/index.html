@@ -16,13 +16,27 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+    <script src="p5.min.js"></script>
     <script src="./chat.js"></script>
+    <script src="./battle.js"></script>
 </head>
 
 <body>
     <div class="main container">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-8">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Batalha Naval</h3>
+                    </div>
+                    <div class="panel-body" id="naval-field">
+                    </div>
+                    <div class="panel-footer">
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">Chat Naval</h3>

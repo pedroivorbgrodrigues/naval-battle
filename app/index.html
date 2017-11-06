@@ -17,12 +17,33 @@
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
     <script src="p5.min.js"></script>
+    <script src="./game.js"></script>
     <script src="./chat.js"></script>
     <script src="./battle.js"></script>
 </head>
 
 <body>
     <div class="main container">
+        <div id="login-modal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <form name="login" action="">
+                            <h3>Enter your username to joing the queue:</h3>
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="username" maxlength="20" placeholder="type username..." />
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-default" type="submit">START</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
         <div class="row">
             <div class="col-md-8">
                 <div class="panel panel-default">
@@ -46,7 +67,7 @@
                         </ul>
                     </div>
                     <div class="panel-footer">
-                        <form action="">
+                        <form name="chat" action="">
                             <div class="input-group">
                                 <input type="text" id="message" class="form-control" placeholder="Digite sua mensagem...">
                                 <span class="input-group-btn">

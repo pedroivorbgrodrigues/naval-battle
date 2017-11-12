@@ -1,0 +1,27 @@
+.main.container {
+    padding-top: 5vh;
+    height: 80vh;
+    padding-bottom: 5vh;
+}
+
+.panel-body {
+    height: 82vh;
+}
+
+.panel-half {
+    height: 35vh;
+    overflow-y: scroll;
+}
+.panel-footer {
+    padding: 0;
+}
+
+#my-turn {
+    color: green;
+    display: none;
+}
+
+#opponent-turn {
+    color: red;
+    display: none;
+}

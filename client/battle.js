@@ -1,45 +1,45 @@
 
 var createBoard = function (board) {
-    var matrixSize = 10;
-    var matrix = [];
+    
     var size = 50;
+    var matrix = []
 
     board.setup = function () {
         board.createCanvas(600, 600)
         board.stroke(0)
-        // row indicates the y offset
-        for (var row = 0; row < matrixSize; row++) {
-            // column indicates the x offset
-            for (var column = 0; column < matrixSize; column++) {
-                if(column == 0) {
-                    matrix[row] = []
-                }
-                matrix[row][column] = {hit: false, unit: 'water'}
-            }
-        }
         board.noLoop()
+        window.mySocket.on('battle', function (payload) {
+            matrix = board._userNode.id == 'naval-field' ? payload.board : payload.hitBoard
+            board.redraw()
+        })
     }
 
     board.draw = function () {
-        for (var row = 0; row < matrixSize; row++) {
+        board.clear()
+        if(matrix.length <= 0) {
+            return
+        }
+        for (var row = 0; row < matrix.length; row++) {
             // column indicates the x offset
-            for (var column = 0; column < matrixSize; column++) {
+            for (var column = 0; column < matrix.length; column++) {
                 var cell = getFill(matrix[row][column])
                 board.fill(cell.r, cell.g, cell.b)
                 board.rect(column * size, row * size, size, size)
             }
-        } 
+        }
     }
 
     board.mousePressed = function() {
-        board.clear()
-        var index = getIndex(board.mouseX,board.mouseY)
-        var cell = matrix[index.x][index.y]
-        if(cell) {
-            cell.hit = true
-        }
-        board.redraw()
-        return false
+        if(board._userNode.id != 'naval-hits')
+            return
+        var coordinates = getCoordinates(board.mouseX,board.mouseY)
+        if(!coordinates.hasOwnProperty('x') || !coordinates.hasOwnProperty('y')) 
+            return
+        if(coordinates.x < 0 || coordinates.x >9)
+            return
+        if(coordinates.y < 0 || coordinates.y > 9)
+            return
+        window.mySocket.emit('fire', coordinates)
     }
 
     function getFill(cell) {
@@ -55,7 +55,7 @@ var createBoard = function (board) {
         return {r: 127, g: 127, b: 127}
     }
 
-    function getIndex(mouseX, mouseY) {
+    function getCoordinates(mouseX, mouseY) {
         return {
             x:  Math.floor(mouseY / size),
             y: Math.floor(mouseX / size)

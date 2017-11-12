@@ -18,7 +18,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
     <script src="p5.min.js"></script>
     <script src="./game.js"></script>
-    <script src="./chat.js"></script>
     <script src="./battle.js"></script>
 </head>
 
@@ -31,10 +30,10 @@
                         <form name="login" action="">
                             <h3>Enter your username to joing the queue:</h3>
                             <div class="form-group">
-                                <input class="form-control" type="text" name="username" maxlength="20" placeholder="type username..." />
+                                <input class="form-control" type="text" name="username" maxlength="20" placeholder="type username..." autofocus />
                             </div>
                             <div class="form-group">
-                                <button class="btn btn-default" type="submit">START</button>
+                                <button class="btn btn-default" type="submit">JOIN</button>
                             </div>
                         </form>
                     </div>
@@ -43,41 +42,60 @@
             </div>
             <!-- /.modal-dialog -->
         </div>
+        <div id="game-over-modal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <img id="winner" class="img-responsive" src="winner.png" style="display: none">
+                        <img id="looser" class="img-responsive" src="looser.png" style="display: none">
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
         <!-- /.modal -->
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Batalha Naval</h3>
+                        <h3 class="panel-title">Meus navios</h3>
                     </div>
-                    <div class="panel-body" id="naval-field">
-                    </div>
-                    <div class="panel-footer">
 
+                    <div class="panel-body">
+                        <div id="prepare-buttons"></div>
+                        <div id="naval-field"></div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Chat Naval</h3>
+                        <h3 class="panel-title">Scanner -
+                            <span id="score">0</span>/20</h3>
                     </div>
                     <div class="panel-body">
-                        <ul id="messages" class="list-group">
-                        </ul>
+                        <div id="naval-hits"></div>
                     </div>
                     <div class="panel-footer">
-                        <form name="chat" action="">
-                            <div class="input-group">
-                                <input type="text" id="message" class="form-control" placeholder="Digite sua mensagem...">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" type="submit">Enviar</button>
-                                </span>
-                            </div>
-                        </form>
+                        <div id="my-turn">My turn</div>
+                        <div id="opponent-turn">Opponent's turn</div>
                     </div>
                 </div>
             </div>
+            <!-- <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Log Naval</h3>
+                        </div>
+                        <div class="panel-body panel-half">
+                            <ul id="log" class="list-group">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
         </div>
     </div>
 </body>

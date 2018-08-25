@@ -26,6 +26,17 @@ function createHitBoard() {
     return _createMatrix()
 }
 
+function countShips(matrix) {
+    var count = 0
+    for (var i = 0; i < matrixSize; i++) {
+        for (var j = 0; j < matrixSize; j++) {
+            if(matrix[i][j].unit != 'water')
+                count++
+        }
+    }
+    return count
+}
+
 function _placeShips(matrix) {
     _placeShip(matrix, 4)
     _placeShip(matrix, 3)
@@ -40,7 +51,7 @@ function _placeShips(matrix) {
 }
 
 function _placeShip(matrix, slots) {
-    var placed = _canPlace(matrix, slots)
+    var placed = false
     while (!placed) {
         placed = _canPlace(matrix, slots)
     }
@@ -76,21 +87,24 @@ function _canPlace(matrix, slots) {
         if(!_insideBounds(nc,slots, positive))
             return false
     }
-    var attempt = _.clone(matrix)
     var boat = _getBoatType(slots)
+    var indexes = []
     for (var i = 0; i < slots; i++) {
-        var cel = attempt[nr][nc]
+        var cel = matrix[nr][nc]
         if (cel.unit != 'water') {
             return false
         }
-        cel.unit = boat
+        indexes.push({x: nr, y: nc})
         if (vertical) {
             nr += positive
         } else {
             nc += positive
         }
     }
-    matrix = attempt
+    for (var j = 0; j < indexes.length; j++) {
+        var coord = indexes[j]
+        matrix[coord.x][coord.y].unit = boat
+    }
     return true
 }
 

@@ -31,8 +31,9 @@ $(function(){
             var prepareButtons = $('#prepare-buttons')
             new p5(createBoard, 'naval-field')
             prepareButtons.append('<div id="btnPositionShips" class="btn btn-primary">Position Ships</div>')
-            prepareButtons.append('<div id="btnReady" class="btn btn-success">Ready</div>')
+            prepareButtons.append('<div id="btnReady" class="btn btn-success" disabled="disabled">Ready</div>')
             prepareButtons.on('click', '#btnPositionShips', function(event) {
+                $('#btnReady').removeAttr('disabled')
                 window.mySocket.emit('positionShips', {})
             })
             prepareButtons.on('click', '#btnReady', function(event) {                
